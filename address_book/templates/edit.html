@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Add Address...</h1>
+
+<h2>Edit Address</h2>
 <br />
+
+{% if get_address %}
 <form method="POST">
   {% csrf_token %}
 
@@ -10,8 +13,7 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="Full Name"
-      name="name"
+      value="{{ get_address.name }}"
     />
   </div>
 
@@ -21,8 +23,7 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="Enter email"
-      name="email"
+      value="{{ get_address.email }}"
     />
   </div>
 
@@ -32,8 +33,7 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="Phone"
-      name="phone"
+      value="{{ get_address.phone }}"
     />
   </div>
 
@@ -43,8 +43,7 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="Address"
-      name="address"
+      value="{{ get_address.address }}"
     />
   </div>
 
@@ -54,8 +53,7 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="City"
-      name="city"
+      value="{{ get_address.city }}"
     />
   </div>
 
@@ -65,8 +63,7 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="State"
-      name="state"
+      value="{{ get_address.state }}"
     />
   </div>
 
@@ -76,12 +73,26 @@
       class="form-control"
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
-      placeholder="Zipcode"
-      name="zipcode"
+      value="{{ get_address.zipcode }}"
     />
   </div>
+
+  <div class="form-group">
+    <input type="hidden" value="{{ get_address.id }}" name="id" />
+  </div>
+
   <br />
-  <button type="submit" class="btn btn-primary">Add Address</button>
+  <button type="submit" class="btn btn-primary">Edit Address</button>
 </form>
 
-{% endblock %}
+<br />
+<br />
+
+<form method="POST" action="{% url 'delete' get_address.id %}">
+  {% csrf_token %}
+  <input type="hidden" value="{{ get_address.id }}" name="id" />
+  <button type="submit" class="btn btn-secondary">
+    Delete Address
+  </button>
+</form>
+{% endif %} {% endblock %}

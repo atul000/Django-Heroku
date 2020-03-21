@@ -1,3 +1,27 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Hllo World</h1>
+
+<div class="container">
+  <div class="row">
+    {% if all_addresses %} {% for i in all_addresses %}
+    <div class="col-sm">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{i.name}}</h5>
+          <p class="card-text">
+            {{i.name}} <br />
+            {{i.email}} <br />
+            {{i.phone}} <br />
+            {{i.address}} <br />
+            {{i.city}} <br />
+            {{i.state}} <br />
+            {{i.zipcode}} <br />
+          </p>
+          <a href="{% url 'edit' i.id %}" class="btn btn-secondary">Edit</a>
+        </div>
+      </div>
+      <br />
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+</div>
 {% endblock %}
